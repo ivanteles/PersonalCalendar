@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Calendar.Web")]
+[assembly: AssemblyTitle("PersonalCalendar.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Calendar.Web")]
+[assembly: AssemblyProduct("PersonalCalendar.Web")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ad372463-9df6-43d2-bc67-3740920a5597")]
+[assembly: Guid("6bc686a6-f59a-4ef2-92dc-aba4e30c882f")]
 
 // Version information for an assembly consists of the following four values:
 //
