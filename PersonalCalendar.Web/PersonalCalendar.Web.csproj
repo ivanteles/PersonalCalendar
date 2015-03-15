@@ -128,6 +128,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CalendarsController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -136,10 +137,10 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Calendars\Details.cshtml" />
     <Content Include="Views\Calendars\Index.cshtml" />
     <Content Include="Views\Shared\Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -152,6 +153,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PersonalCalendar.Data\PersonalCalendar.Data.csproj">
+      <Project>{dfa34cb6-a637-4947-83c5-fa0a15d546d0}</Project>
+      <Name>PersonalCalendar.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PersonalCalendar.Domain\PersonalCalendar.Domain.csproj">
       <Project>{3f007a58-e37a-4573-a67f-4bee6b63b981}</Project>
       <Name>PersonalCalendar.Domain</Name>

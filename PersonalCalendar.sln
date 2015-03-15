@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalCalendar.Service", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalCalendar.Data", "PersonalCalendar.Data\PersonalCalendar.Data.csproj", "{DFA34CB6-A637-4947-83C5-FA0A15D546D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalCalendar.Tests", "PersonalCalendar.Tests\PersonalCalendar.Tests.csproj", "{68A32517-9BBD-48E2-80E7-8E0A7970B4E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DFA34CB6-A637-4947-83C5-FA0A15D546D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFA34CB6-A637-4947-83C5-FA0A15D546D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFA34CB6-A637-4947-83C5-FA0A15D546D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A32517-9BBD-48E2-80E7-8E0A7970B4E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A32517-9BBD-48E2-80E7-8E0A7970B4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A32517-9BBD-48E2-80E7-8E0A7970B4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A32517-9BBD-48E2-80E7-8E0A7970B4E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,10 +13,5 @@ namespace PersonalCalendar.Web.Controllers
 
             return View(calendars);
         }
-
-        public ActionResult Details()
-        {
-            return View();
-        }
     }
 }
