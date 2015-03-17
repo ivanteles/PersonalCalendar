@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using PersonalCalendar.Infrastructure;
+using System;
 using System.Collections.Generic;
 
 namespace PersonalCalendar.Domain
@@ -7,137 +7,163 @@ namespace PersonalCalendar.Domain
     public class Event : ICloneable
     {
         public int Id { get; set; }
+
         public int CalendarId { get; set; }
+
         public string Title { get; set; }
+
         public string Location { get; set; }
+
         public string Description { get; set; }
+
         public string Color { get; set; }
-        public DateTime StartDateUTC { get; set; }
-        public DateTime EndDateUTC { get; set; }
+
+        public DateTime StartDateTimeUTC { get; set; }
+
+        public DateTime EndDateTimeUTC { get; set; }
+
         public DateTime? SeriesEndDateUTC { get; set; }
+
         public FrequencyType FreqType { get; set; }
+
         public FrequencySubtype FreqSubtype { get; set; }
+
         public int FreqInterval { get; set; }
 
         public Calendar Calendar { get; set; }
 
-        public IEnumerable<DateTime> GetSeriesOccurences(DateTime endDateUTC)
+        public IEnumerable<DateTime> GetSeriesOccurences(DateTime endDateTimeUTC)
         {
-            List<DateTime> occurences = new List<DateTime>();
+            IEnumerable<DateTime> occurences = new List<DateTime>();
 
             DateTime eventEndDateTime = SeriesEndDateUTC.HasValue 
-                                        ? (SeriesEndDateUTC.Value < endDateUTC ? SeriesEndDateUTC.Value : endDateUTC) 
-                                        : endDateUTC;
+                                        ? (SeriesEndDateUTC.Value < endDateTimeUTC ? SeriesEndDateUTC.Value : endDateTimeUTC) 
+                                        : endDateTimeUTC;
 
             switch(FreqType)
             {
                 case FrequencyType.Daily:
-                    for (DateTime dateTime = StartDateUTC; dateTime < eventEndDateTime; dateTime = dateTime.AddDays(FreqInterval))
-                    {
-                        occurences.Add(dateTime);
-                    }
+                    occurences = GetDailyRecurringOccurences(eventEndDateTime);
                     break;
 
                 case FrequencyType.Weekly:
-                    if(FreqSubtype == FrequencySubtype.None)
-                    {
-                        for (DateTime dateTime = StartDateUTC; dateTime < eventEndDateTime; dateTime = dateTime.AddDays(7 * FreqInterval))
-                        {
-                            occurences.Add(dateTime);
-                        }
-                    }
-                    else
-                    {
-                        List<DayOfWeek> daysOfWeek = new List<DayOfWeek>();
-                       
-                        if((FreqSubtype & FrequencySubtype.Monday) == FrequencySubtype.Monday)
-                            daysOfWeek.Add(DayOfWeek.Monday);
-
-                        if ((FreqSubtype & FrequencySubtype.Tuesday) == FrequencySubtype.Tuesday)
-                            daysOfWeek.Add(DayOfWeek.Tuesday);
-
-                        if ((FreqSubtype & FrequencySubtype.Wednesday) == FrequencySubtype.Wednesday)
-                            daysOfWeek.Add(DayOfWeek.Wednesday);
-
-                        if ((FreqSubtype & FrequencySubtype.Thursday) == FrequencySubtype.Thursday)
-                            daysOfWeek.Add(DayOfWeek.Thursday);
-
-                        if ((FreqSubtype & FrequencySubtype.Friday) == FrequencySubtype.Friday)
-                            daysOfWeek.Add(DayOfWeek.Friday);
-
-                        if ((FreqSubtype & FrequencySubtype.Saturday) == FrequencySubtype.Saturday)
-                            daysOfWeek.Add(DayOfWeek.Saturday);
-
-                        if ((FreqSubtype & FrequencySubtype.Sunday) == FrequencySubtype.Sunday)
-                            daysOfWeek.Add(DayOfWeek.Sunday);
-
-                        foreach(var dayOfWeek in daysOfWeek)
-                        {
-                            DateTime startWeekday = GetNextWeekday(StartDateUTC, dayOfWeek);
-
-                            for (DateTime dateTime = startWeekday; dateTime < eventEndDateTime; dateTime = dateTime.AddDays(7 * FreqInterval))
-                            {
-                                occurences.Add(dateTime);
-                            }
-                        }
-                    }
-
+                    occurences = GetWeeklyRecurringOccurences(eventEndDateTime);
                     break;
 
                 case FrequencyType.Monthly:
-                    int dayOfWeekNumber = (int)Math.Ceiling(StartDateUTC.Day / 7.0);
-                    DayOfWeek weekDay = StartDateUTC.DayOfWeek;
-
-                    for (DateTime dateTime = StartDateUTC; dateTime < eventEndDateTime; dateTime = dateTime.AddMonths(FreqInterval))
-                    {
-                        if(FreqSubtype == FrequencySubtype.DayOfTheWeek)
-                        {
-                            DateTime month = new DateTime(dateTime.Year, dateTime.Month, 1);
-                            DateTime occurence = GetNthWeekDayOfTheMonth(month, dayOfWeekNumber, weekDay);
-                            
-                            occurences.Add(occurence.Add(dateTime.TimeOfDay));
-                        }
-                        else
-                        {
-                            occurences.Add(dateTime);
-                        }
-                    }
-
+                    occurences = GetMonthlyRecurringOccurences(eventEndDateTime);
                     break;
 
                 case FrequencyType.Yearly:
-
-                    for (DateTime dateTime = StartDateUTC; dateTime < eventEndDateTime; dateTime = dateTime.AddYears(FreqInterval))
-                    {
-                        occurences.Add(dateTime);
-                    }
-
+                    occurences = GetYearlyRecurringOccurences(eventEndDateTime);
                     break;
 
                 case FrequencyType.EveryEvenWeekday:
                 case FrequencyType.EveryOddWeekday:
                 case FrequencyType.EveryWeekday:
                     throw new NotImplementedException();
-                   
             }
 
             return occurences;
         }
 
-        // TODO: Move as extension method.
-        private DateTime GetNextWeekday(DateTime start, DayOfWeek day)
+        private IEnumerable<DateTime> GetDailyRecurringOccurences(DateTime endDateTimeUTC)
         {
-            int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
-            
-            return start.AddDays(daysToAdd);
+            List<DateTime> occurences = new List<DateTime>();
+
+            for (DateTime dateTime = StartDateTimeUTC; dateTime < endDateTimeUTC; dateTime = dateTime.AddDays(FreqInterval))
+            {
+                occurences.Add(dateTime);
+            }
+
+            return occurences;
         }
 
-
-        private DateTime GetNthWeekDayOfTheMonth(DateTime date, int nthWeekDay, DayOfWeek dayOfWeek)
+        private IEnumerable<DateTime> GetWeeklyRecurringOccurences(DateTime endDateTimeUTC)
         {
-            DateTime d = date.AddDays((dayOfWeek < date.DayOfWeek ? 7 : 0) + dayOfWeek - date.DayOfWeek);
+            List<DateTime> occurences = new List<DateTime>();
 
-            return d.AddDays((nthWeekDay - 1) * 7);
+            if (FreqSubtype == FrequencySubtype.None)
+            {
+                for (DateTime dateTime = StartDateTimeUTC; dateTime < endDateTimeUTC; dateTime = dateTime.AddDays(7 * FreqInterval))
+                {
+                    occurences.Add(dateTime);
+                }
+            }
+            else
+            {
+                List<DayOfWeek> daysOfWeek = new List<DayOfWeek>();
+
+                if ((FreqSubtype & FrequencySubtype.Monday) == FrequencySubtype.Monday)
+                    daysOfWeek.Add(DayOfWeek.Monday);
+
+                if ((FreqSubtype & FrequencySubtype.Tuesday) == FrequencySubtype.Tuesday)
+                    daysOfWeek.Add(DayOfWeek.Tuesday);
+
+                if ((FreqSubtype & FrequencySubtype.Wednesday) == FrequencySubtype.Wednesday)
+                    daysOfWeek.Add(DayOfWeek.Wednesday);
+
+                if ((FreqSubtype & FrequencySubtype.Thursday) == FrequencySubtype.Thursday)
+                    daysOfWeek.Add(DayOfWeek.Thursday);
+
+                if ((FreqSubtype & FrequencySubtype.Friday) == FrequencySubtype.Friday)
+                    daysOfWeek.Add(DayOfWeek.Friday);
+
+                if ((FreqSubtype & FrequencySubtype.Saturday) == FrequencySubtype.Saturday)
+                    daysOfWeek.Add(DayOfWeek.Saturday);
+
+                if ((FreqSubtype & FrequencySubtype.Sunday) == FrequencySubtype.Sunday)
+                    daysOfWeek.Add(DayOfWeek.Sunday);
+
+                foreach (var dayOfWeek in daysOfWeek)
+                {
+                    DateTime startWeekday = StartDateTimeUTC.GetNextWeekday(dayOfWeek);
+
+                    for (DateTime dateTime = startWeekday; dateTime < endDateTimeUTC; dateTime = dateTime.AddDays(7 * FreqInterval))
+                    {
+                        occurences.Add(dateTime);
+                    }
+                }
+            }
+
+            return occurences;
+        }
+
+        private IEnumerable<DateTime> GetMonthlyRecurringOccurences(DateTime endDateTimeUTC)
+        {
+            List<DateTime> occurences = new List<DateTime>();
+
+            int dayOfWeekNumber = (int)Math.Ceiling(StartDateTimeUTC.Day / 7.0);
+            DayOfWeek weekDay = StartDateTimeUTC.DayOfWeek;
+
+            for (DateTime dateTime = StartDateTimeUTC; dateTime < endDateTimeUTC; dateTime = dateTime.AddMonths(FreqInterval))
+            {
+                if (FreqSubtype == FrequencySubtype.DayOfTheWeek)
+                {
+                    DateTime month = new DateTime(dateTime.Year, dateTime.Month, 1);
+                    DateTime occurence = month.GetNextNthWeekdayOfTheMonth(dayOfWeekNumber, weekDay);
+
+                    occurences.Add(occurence.Add(dateTime.TimeOfDay));
+                }
+                else
+                {
+                    occurences.Add(dateTime);
+                }
+            }
+
+            return occurences;
+        }
+
+        private IEnumerable<DateTime> GetYearlyRecurringOccurences(DateTime endDateTimeUTC)
+        {
+            List<DateTime> occurences = new List<DateTime>();
+
+            for (DateTime dateTime = StartDateTimeUTC; dateTime < endDateTimeUTC; dateTime = dateTime.AddYears(FreqInterval))
+            {
+                occurences.Add(dateTime);
+            }
+
+            return occurences;
         }
 
         public object Clone()

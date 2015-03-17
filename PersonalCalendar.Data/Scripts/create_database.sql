@@ -36,8 +36,8 @@ GO
 
 CREATE TABLE Schedules (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-	StartDateUTC DATETIME2 NOT NULL,
-	EndDateUTC DATETIME2 NOT NULL,
+	StartDateTimeUTC DATETIME2 NOT NULL,
+	EndDateTimeUTC DATETIME2 NOT NULL,
 	SeriesEndDateUTC DATETIME2 NULL,
 	FreqType INT NOT NULL,
 	FreqSubtype INT NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE Schedules (
 ) 
 GO
 
-CREATE INDEX IX_StartDateUTC ON Schedules(StartDateUTC)
+CREATE INDEX IX_StartDateTimeUTC ON Schedules(StartDateTimeUTC)
 GO
 
 -- Passowrd: emperor

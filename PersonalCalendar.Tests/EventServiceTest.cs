@@ -151,7 +151,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 14, 10, 0, 0)
             };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = 
             {
@@ -160,7 +160,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 14, 12, 0, 0)
             };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -191,7 +191,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 12, 10, 0, 0)
             };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = 
             {
@@ -202,7 +202,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 13, 10, 0, 0)
             };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -252,7 +252,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 25)
             };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = 
             {
@@ -262,7 +262,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 26)
             };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -292,7 +292,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 21)
             };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = 
             {
@@ -302,7 +302,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 22)
             };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -330,7 +330,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 7)
             };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = 
             {
@@ -338,7 +338,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 8)
             };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -382,11 +382,11 @@ namespace PersonalCalendar.Tests
 
             DateTime[] expectedStartDateTimes = { new DateTime(2015, 2, 28) };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = { new DateTime(2015, 3, 2) };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -418,7 +418,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 11, 5)
             };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = 
             {
@@ -430,7 +430,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 11, 6)
             };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -461,7 +461,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 10, 15, 10, 0, 0)
             };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = 
             {
@@ -471,7 +471,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 10, 16, 11, 0, 0)
             };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -501,7 +501,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 7, 5)
             };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = 
             {
@@ -511,7 +511,7 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 7, 6)
             };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -555,11 +555,11 @@ namespace PersonalCalendar.Tests
 
             DateTime[] expectedStartDateTimes = { new DateTime(2015, 3, 8, 10, 0, 0) };
 
-            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateUTC).Select(e => e.StartDateUTC));
+            CollectionAssert.AreEqual(expectedStartDateTimes, events.OrderBy(e => e.StartDateTimeUTC).Select(e => e.StartDateTimeUTC));
 
             DateTime[] expectedEndDateTimes = { new DateTime(2015, 3, 8, 12, 0, 0) };
 
-            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateUTC).Select(e => e.EndDateUTC));
+            CollectionAssert.AreEqual(expectedEndDateTimes, events.OrderBy(e => e.EndDateTimeUTC).Select(e => e.EndDateTimeUTC));
         }
 
         [Test]
@@ -582,6 +582,32 @@ namespace PersonalCalendar.Tests
             Assert.AreEqual(0, events.Count());
         }
 
+        [Test]
+        public void GetRecurringEventsForCalendar_WhenDifferentlyRecurringEvents_ReturnsAllRecurringEventsForGivenTimePeriod()
+        {
+            // Arrange
+            IQueryable<Event> mockEvents = new List<Event>
+            {
+                PrepareRecurringEvent(1, new DateTime(2015, 3, 13), new DateTime(2015, 3, 14), new DateTime(2015, 3, 20), "daily", FrequencyType.Daily, FrequencySubtype.None, 1),
+                PrepareRecurringEvent(2, new DateTime(2015, 3, 5), new DateTime(2015, 3, 6), new DateTime(2015, 3, 20), "weekly", FrequencyType.Weekly, FrequencySubtype.None, 1),
+                PrepareRecurringEvent(3, new DateTime(2015, 1, 1), new DateTime(2015, 1, 2), null, "monthly", FrequencyType.Monthly, FrequencySubtype.None, 1),
+                PrepareRecurringEvent(4, new DateTime(2015, 1, 1), new DateTime(2015, 1, 2), null, "yearly", FrequencyType.Yearly, FrequencySubtype.None, 1),
+            }.AsQueryable();
+
+            CalendarDB calendarDB = PrepareCalendarDB(mockEvents);
+            EventService service = new EventService(calendarDB);
+
+            // Act
+            DateTime startDateTime = new DateTime(2015, 1, 1);
+            IEnumerable<Event> events = service.GetRecurringEventsForCalendar(1, startDateTime, startDateTime.AddYears(1));
+
+            // Assert
+            Assert.AreEqual(7, events.Count(e => e.Id == 1));
+            Assert.AreEqual(3, events.Count(e => e.Id == 2));
+            Assert.AreEqual(12, events.Count(e => e.Id == 3));
+            Assert.AreEqual(1, events.Count(e => e.Id == 4));
+        }
+
         private CalendarDB PrepareCalendarDB(IQueryable<Event> events)
         {
             var eventsSetMock = new Mock<DbSet<Event>>();
@@ -596,14 +622,14 @@ namespace PersonalCalendar.Tests
             return calendarDBMock.Object;
         }
 
-        private Event PrepareOneTimeEvent(int id, DateTime startDateUTC, DateTime endDateUTC, string title)
+        private Event PrepareOneTimeEvent(int id, DateTime startDateTimeUTC, DateTime endDateTimeUTC, string title)
         {
             return new Event
             {
                 Id = id,
                 CalendarId = 1,
-                StartDateUTC = startDateUTC,
-                EndDateUTC = endDateUTC,
+                StartDateTimeUTC = startDateTimeUTC,
+                EndDateTimeUTC = endDateTimeUTC,
                 Title = title,
                 FreqType = FrequencyType.OnlyOnce,
                 FreqSubtype = FrequencySubtype.None,
@@ -614,9 +640,9 @@ namespace PersonalCalendar.Tests
 
         private Event PrepareRecurringEvent(
             int id, 
-            DateTime startDateUTC, 
+            DateTime startDateTimeUTC, 
             DateTime endDateUTC, 
-            DateTime? seriesEndDateUTC, 
+            DateTime? seriesEndDateTimeUTC, 
             string title, 
             FrequencyType freqType, 
             FrequencySubtype freqSubtype,
@@ -626,13 +652,13 @@ namespace PersonalCalendar.Tests
             {
                 Id = id,
                 CalendarId = 1,
-                StartDateUTC = startDateUTC,
-                EndDateUTC = endDateUTC,
+                StartDateTimeUTC = startDateTimeUTC,
+                EndDateTimeUTC = endDateUTC,
                 Title = title,
                 FreqType = freqType,
                 FreqSubtype = freqSubtype,
                 FreqInterval = freqInterval,
-                SeriesEndDateUTC = seriesEndDateUTC
+                SeriesEndDateUTC = seriesEndDateTimeUTC
             };
         }
     }
