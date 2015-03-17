@@ -20,7 +20,7 @@ namespace PersonalCalendar.Data
 
                 .Map(map =>
                 {
-                    map.Properties(p => new { StartDateUTC = p.StartDateTimeUTC, EndDateUTC = p.EndDateTimeUTC, p.SeriesEndDateUTC, p.FreqType, p.FreqSubtype, p.FreqInterval });
+                    map.Properties(p => new { p.StartDateTimeUTC, p.EndDateTimeUTC, p.SeriesEndDateUTC, p.FreqType, p.FreqSubtype, p.FreqInterval });
                     map.ToTable("Schedules");
                 });
 

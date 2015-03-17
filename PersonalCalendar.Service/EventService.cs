@@ -6,7 +6,14 @@ using System.Linq;
 
 namespace PersonalCalendar.Service
 {
-    public class EventService
+    public interface IEventService
+    {
+        IEnumerable<Event> GetOneTimeEventsForCalendar(long calendarId, DateTime startDateTimeUTC, DateTime endDateTimeUTC);
+
+        IEnumerable<Event> GetRecurringEventsForCalendar(long calendarId, DateTime startDateTimeUTC, DateTime endDateTimeUTC);
+    }
+
+    public class EventService : IEventService
     {
         protected readonly CalendarDB _calendarDB;
 

@@ -32,6 +32,7 @@ namespace PersonalCalendar.Domain
 
         public Calendar Calendar { get; set; }
 
+        // TODO: Probably Open-Closed principle violation!
         public IEnumerable<DateTime> GetSeriesOccurences(DateTime endDateTimeUTC)
         {
             IEnumerable<DateTime> occurences = new List<DateTime>();

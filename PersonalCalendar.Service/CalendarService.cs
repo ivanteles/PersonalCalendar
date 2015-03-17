@@ -7,9 +7,19 @@ using System.Linq.Expressions;
 
 namespace PersonalCalendar.Service
 {
-    public class CalendarService
+    public interface ICalendarService
     {
-        CalendarDB _calendarDB = new CalendarDB();
+        IEnumerable<Calendar> GetAll(Expression<Func<Calendar, bool>> predicate);
+    }
+
+    public class CalendarService : ICalendarService
+    {
+        protected readonly CalendarDB _calendarDB;
+
+        public CalendarService(CalendarDB context)
+        {
+            _calendarDB = context;
+        }
 
         public IEnumerable<Calendar> GetAll(Expression<Func<Calendar, bool>> predicate)
         {

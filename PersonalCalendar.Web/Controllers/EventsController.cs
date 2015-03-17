@@ -1,10 +1,17 @@
-﻿using System.Web.Mvc;
+﻿using PersonalCalendar.Service;
+using System.Web.Mvc;
 
 namespace PersonalCalendar.Web.Controllers
 {
     public class EventsController : Controller
     {
-        // GET: Events
+        protected readonly IEventService _service;
+
+        public EventsController(IEventService service)
+        {
+            _service = service;
+        }
+
         public ActionResult Index()
         {
             return View();
