@@ -1,4 +1,5 @@
 ﻿using PersonalCalendar.Service;
+using PersonalCalendar.Web.ViewModels.Events;
 using System.Web.Mvc;
 
 namespace PersonalCalendar.Web.Controllers
@@ -12,9 +13,18 @@ namespace PersonalCalendar.Web.Controllers
             _service = service;
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult New(int calendarId)
         {
-            return View();
+            var eventFormViewModel = new EventFormViewModel { CalendarId = calendarId };
+
+            return View(eventFormViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Create(EventFormViewModel eventFormViewModel)
+        {
+            return RedirectToAction("Details", "Calendars", new { id = eventFormViewModel.CalendarId });
         }
     }
 }

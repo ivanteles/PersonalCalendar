@@ -1,6 +1,10 @@
-﻿@model IEnumerable<PersonalCalendar.Domain.Calendar>
+﻿@model IEnumerable<PersonalCalendar.Web.ViewModels.Calendars.CalendarViewModel>
+
+<h3>Personal Calendars</h3>
 
 @foreach(var calendar in Model)
 {
-    <p>@calendar.Name</p>
+    <p>
+        @Html.ActionLink(calendar.Name, "Details", new { id = calendar.Id })
+    </p>
 }

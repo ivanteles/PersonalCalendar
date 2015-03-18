@@ -1,4 +1,8 @@
-﻿using PersonalCalendar.Service;
+﻿using AutoMapper;
+using PersonalCalendar.Domain;
+using PersonalCalendar.Service;
+using PersonalCalendar.Web.ViewModels.Calendars;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace PersonalCalendar.Web.Controllers
@@ -12,11 +16,24 @@ namespace PersonalCalendar.Web.Controllers
             _service = service;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
-            var calendars = _service.GetAll(x => x.Id > 0);
+            IEnumerable<Calendar> calendars = _service.GetAll(c => c.UserId == 1);
 
-            return View(calendars);
+            var calendarViewModels = Mapper.Map<IEnumerable<CalendarViewModel>>(calendars);
+
+            return View(calendarViewModels);
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            Calendar calendar = _service.Find(id);
+
+            var calendarViewModel = Mapper.Map<CalendarViewModel>(calendar);
+
+            return View(calendarViewModel);
         }
     }
 }

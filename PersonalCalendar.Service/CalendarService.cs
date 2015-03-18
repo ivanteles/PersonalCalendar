@@ -10,6 +10,8 @@ namespace PersonalCalendar.Service
     public interface ICalendarService
     {
         IEnumerable<Calendar> GetAll(Expression<Func<Calendar, bool>> predicate);
+
+        Calendar Find(int id);
     }
 
     public class CalendarService : ICalendarService
@@ -23,7 +25,12 @@ namespace PersonalCalendar.Service
 
         public IEnumerable<Calendar> GetAll(Expression<Func<Calendar, bool>> predicate)
         {
-            return _calendarDB.Calendars.AsEnumerable<Calendar>();
+            return _calendarDB.Calendars.Where(predicate).ToList();
+        }
+
+        public Calendar Find(int id)
+        {
+            return _calendarDB.Calendars.Find(id);
         }
     }
 }

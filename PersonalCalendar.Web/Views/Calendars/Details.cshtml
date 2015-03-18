@@ -1,0 +1,7 @@
+﻿@model PersonalCalendar.Web.ViewModels.Calendars.CalendarViewModel
+
+<h3>@Model.Name</h3>
+
+<div class="content">
+    @Html.ActionLink("Add event", "New", new { Controller = "Events", calendarId = Model.Id })
+</div>

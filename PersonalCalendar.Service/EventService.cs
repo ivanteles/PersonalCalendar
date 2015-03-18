@@ -32,7 +32,7 @@ namespace PersonalCalendar.Service
                 || (e.EndDateTimeUTC > startDateTimeUTC && e.EndDateTimeUTC <= endDateTimeUTC))
             );
 
-            return events;
+            return events.ToList();
         }
 
         public IEnumerable<Event> GetRecurringEventsForCalendar(long calendarId, DateTime startDateTimeUTC, DateTime endDateTimeUTC)
@@ -50,7 +50,7 @@ namespace PersonalCalendar.Service
 
             IEnumerable<Event> resultEvents = CreateRecurringEventsOccurences(events, startDateTimeUTC, endDateTimeUTC);
 
-            return resultEvents;
+            return resultEvents.ToList();
         }
 
         private IEnumerable<Event> CreateRecurringEventsOccurences(IEnumerable<Event> events, DateTime startDateTimeUTC, DateTime endDateTimeUTC)

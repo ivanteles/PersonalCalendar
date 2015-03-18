@@ -1,0 +1,58 @@
+﻿@model PersonalCalendar.Web.ViewModels.Events.EventFormViewModel
+
+<h3>Create new event</h3>
+
+<div class="content">
+
+    @using (Html.BeginForm("Create", "Events"))
+    {
+        @Html.HiddenFor(m => m.CalendarId)
+        
+        <p>
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title)
+        </p>
+        
+        <p>
+            @Html.LabelFor(m => m.Location)
+            @Html.TextBoxFor(m => m.Location)
+        </p>
+
+        <p>
+            @Html.LabelFor(m => m.Description)
+            @Html.TextAreaFor(m => m.Description)
+        </p>
+
+        <p>
+            @Html.LabelFor(m => m.Color)
+            @Html.TextBoxFor(m => m.Color)
+        </p>
+
+        <p>
+            @Html.LabelFor(m => m.StartDateTime)
+            @Html.TextBoxFor(m => m.StartDateTime)
+        </p>
+
+        <p>
+            @Html.LabelFor(m => m.EndDateTime)
+            @Html.TextBoxFor(m => m.EndDateTime)
+        </p>
+        
+        <hr />
+        
+        <p>
+            @Html.LabelFor(m => m.FreqType)
+            @Html.EnumDropDownListFor(m => m.FreqType)
+        </p>
+
+        <p>
+            @Html.LabelFor(m => m.FreqInterval)
+            @Html.TextBoxFor(m => m.FreqInterval)
+        </p>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    }
+
+</div>

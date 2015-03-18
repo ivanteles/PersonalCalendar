@@ -2,7 +2,6 @@
 
 namespace PersonalCalendar.Domain
 {
-    [Flags]
     public enum FrequencyType
     {
         OnlyOnce = 0,
