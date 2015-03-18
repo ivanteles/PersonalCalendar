@@ -4,4 +4,6 @@
 
 <div class="content">
     @Html.ActionLink("Add event", "New", new { Controller = "Events", calendarId = Model.Id })
+
+    @{ Html.RenderAction("Index", "Events", new { calendarId = Model.Id }); }
 </div>

@@ -3,6 +3,9 @@ using PersonalCalendar.Service;
 using PersonalCalendar.Web.ViewModels.Events;
 using System;
 using System.Web.Mvc;
+using System.Linq;
+using System.Collections.Generic;
+using AutoMapper;
 
 namespace PersonalCalendar.Web.Controllers
 {
@@ -13,6 +16,41 @@ namespace PersonalCalendar.Web.Controllers
         public EventsController(IEventService service)
         {
             _service = service;
+        }
+
+        [HttpGet]
+        public PartialViewResult Index(int calendarId, string calendarView = "month")
+        {
+            DateTime now = DateTime.UtcNow;
+
+            // Only "month" calendar view implemented.
+            DateTime firstDayUTC = new DateTime(now.Year, now.Month, 1);
+            DateTime lastDayUTC = firstDayUTC.AddMonths(1);
+
+            var oneTimeEvents = _service.GetOneTimeEventsForCalendar(calendarId, firstDayUTC, lastDayUTC);
+            var recurringEvents = _service.GetRecurringEventsForCalendar(calendarId, firstDayUTC, lastDayUTC);
+
+            var allGroupedEvents = oneTimeEvents.Concat(recurringEvents).OrderBy(e => e.StartDateTimeUTC).GroupBy(e => e.StartDateTimeUTC.ToLocalTime().Date);
+
+            List<EventViewModel> eventsViewModel = new List<EventViewModel>();
+
+            foreach(var group in allGroupedEvents)
+            {
+                var eventViewModel = new EventViewModel { OccurenceDateTime = group.Key.ToLocalTime() };
+
+                List<EventDetailsViewModel> eventDetails = new List<EventDetailsViewModel>();
+
+                foreach(var evt in group)
+                {
+                    eventDetails.Add(Mapper.Map<EventDetailsViewModel>(evt));
+                }
+
+                eventViewModel.Details = eventDetails;
+
+                eventsViewModel.Add(eventViewModel);
+            }
+
+            return PartialView("_Index", eventsViewModel);
         }
 
         [HttpGet]

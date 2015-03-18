@@ -1,0 +1,31 @@
+﻿@model IEnumerable<PersonalCalendar.Web.ViewModels.Events.EventViewModel>
+
+<div class="events-container">
+    @foreach(var evt in Model)
+    {
+        <h3>@evt.OccurenceDateTime.ToString("yyyy-MM-dd")</h3>
+        <hr />
+
+        <table class="table">
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Description</th>
+            </tr>
+
+            @foreach(var evtDetails in evt.Details)
+            {
+                <tr>
+                    <td>@evtDetails.StartDateTime</td>
+                    <td>@evtDetails.EndDateTime</td>
+                    <td>@evtDetails.Title</td>
+                    <td>@evtDetails.Location</td>
+                    <td>@evtDetails.Description</td>
+                </tr>
+            }
+
+        </table>
+    }
+</div>
