@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace PersonalCalendar.Domain
 {
-    public class Event : ICloneable
+    public class Event : Entity, ICloneable
     {
-        public int Id { get; set; }
-
         public int CalendarId { get; set; }
 
         public string Title { get; set; }

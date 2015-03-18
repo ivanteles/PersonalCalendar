@@ -6,21 +6,17 @@ using System.Linq;
 
 namespace PersonalCalendar.Service
 {
-    public interface IEventService
+    public interface IEventService : ICrudService<Event>
     {
         IEnumerable<Event> GetOneTimeEventsForCalendar(long calendarId, DateTime startDateTimeUTC, DateTime endDateTimeUTC);
 
         IEnumerable<Event> GetRecurringEventsForCalendar(long calendarId, DateTime startDateTimeUTC, DateTime endDateTimeUTC);
     }
 
-    public class EventService : IEventService
+    public class EventService : CrudService<Event>, IEventService
     {
-        protected readonly CalendarDB _calendarDB;
-
         public EventService(CalendarDB context)
-        {
-            _calendarDB = context;
-        }
+            : base(context) { }
 
         public IEnumerable<Event> GetOneTimeEventsForCalendar(long calendarId, DateTime startDateTimeUTC, DateTime endDateTimeUTC)
         {
@@ -32,7 +28,7 @@ namespace PersonalCalendar.Service
                 || (e.EndDateTimeUTC > startDateTimeUTC && e.EndDateTimeUTC <= endDateTimeUTC))
             );
 
-            return events.ToList();
+            return events;
         }
 
         public IEnumerable<Event> GetRecurringEventsForCalendar(long calendarId, DateTime startDateTimeUTC, DateTime endDateTimeUTC)
@@ -50,7 +46,7 @@ namespace PersonalCalendar.Service
 
             IEnumerable<Event> resultEvents = CreateRecurringEventsOccurences(events, startDateTimeUTC, endDateTimeUTC);
 
-            return resultEvents.ToList();
+            return resultEvents;
         }
 
         private IEnumerable<Event> CreateRecurringEventsOccurences(IEnumerable<Event> events, DateTime startDateTimeUTC, DateTime endDateTimeUTC)

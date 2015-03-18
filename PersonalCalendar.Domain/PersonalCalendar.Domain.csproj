@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calendar.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="FrequencySubtype.cs" />
     <Compile Include="FrequencyType.cs" />

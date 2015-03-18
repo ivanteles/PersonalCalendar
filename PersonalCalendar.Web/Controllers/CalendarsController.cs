@@ -19,7 +19,7 @@ namespace PersonalCalendar.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            IEnumerable<Calendar> calendars = _service.GetAll(c => c.UserId == 1);
+            IEnumerable<Calendar> calendars = _service.Where(c => c.UserId == 1);
 
             var calendarViewModels = Mapper.Map<IEnumerable<CalendarViewModel>>(calendars);
 
