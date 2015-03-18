@@ -17,6 +17,6 @@ namespace PersonalCalendar.Domain
             _interval = interval;
         }
 
-        public abstract IEnumerable<DateTime> GetOccurences(DateTime startDateTime, DateTime endDateTime);
+        public abstract IEnumerable<DateTime> GetOccurrences(DateTime startDateTime, DateTime endDateTime);
     }
 }

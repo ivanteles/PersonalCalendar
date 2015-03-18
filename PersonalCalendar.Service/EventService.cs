@@ -44,23 +44,23 @@ namespace PersonalCalendar.Service
                         && e.EndDateTimeUTC > startDateTimeUTC))
             );
 
-            IEnumerable<Event> resultEvents = CreateRecurringEventsOccurences(events, startDateTimeUTC, endDateTimeUTC);
+            IEnumerable<Event> resultEvents = CreateRecurringEventsOccurrences(events, startDateTimeUTC, endDateTimeUTC);
 
             return resultEvents;
         }
 
-        private IEnumerable<Event> CreateRecurringEventsOccurences(IEnumerable<Event> events, DateTime startDateTimeUTC, DateTime endDateTimeUTC)
+        private IEnumerable<Event> CreateRecurringEventsOccurrences(IEnumerable<Event> events, DateTime startDateTimeUTC, DateTime endDateTimeUTC)
         {
             IList<Event> resultEvents = new List<Event>();
 
             foreach (var evt in events)
             {
-                IEnumerable<DateTime> occurences = evt.GetSeriesOccurences(endDateTimeUTC);
+                IEnumerable<DateTime> occurrences = evt.GetSeriesOccurrences(endDateTimeUTC);
 
-                foreach (DateTime occurence in occurences)
+                foreach (DateTime occurrence in occurrences)
                 {
-                    DateTime eventStartDateTimeUTC = occurence;
-                    DateTime eventEndDateTimeUTC = occurence.Add(evt.EndDateTimeUTC - evt.StartDateTimeUTC);
+                    DateTime eventStartDateTimeUTC = occurrence;
+                    DateTime eventEndDateTimeUTC = occurrence.Add(evt.EndDateTimeUTC - evt.StartDateTimeUTC);
 
                     if (eventStartDateTimeUTC < endDateTimeUTC && eventEndDateTimeUTC > startDateTimeUTC)
                     {

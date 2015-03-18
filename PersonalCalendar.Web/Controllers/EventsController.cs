@@ -36,7 +36,7 @@ namespace PersonalCalendar.Web.Controllers
 
             foreach(var group in allGroupedEvents)
             {
-                var eventViewModel = new EventViewModel { OccurenceDate = group.Key };
+                var eventViewModel = new EventViewModel { OccurrenceDate = group.Key };
 
                 List<EventDetailsViewModel> eventDetails = new List<EventDetailsViewModel>();
 
@@ -104,13 +104,13 @@ namespace PersonalCalendar.Web.Controllers
             {
                 seriesEndDateUTC = eventFormViewModel.SeriesEndDate.Value.ToUniversalTime();
             }
-            else if(eventFormViewModel.OccurencesCount.HasValue && eventFormViewModel.OccurencesCount.Value > 0)
+            else if(eventFormViewModel.OccurrencesCount.HasValue && eventFormViewModel.OccurrencesCount.Value > 0)
             {
                 switch(eventFormViewModel.FreqType)
                 {
                     case FrequencyType.Weekly:
                         WeeklyScheduler scheduler = new WeeklyScheduler(GetFrequencySubtype(eventFormViewModel), eventFormViewModel.FreqInterval);
-                        seriesEndDateUTC = scheduler.GetOccurenceDateTime(eventFormViewModel.StartDateTime.ToUniversalTime(), eventFormViewModel.OccurencesCount.Value);
+                        seriesEndDateUTC = scheduler.GetOccurrenceDateTime(eventFormViewModel.StartDateTime.ToUniversalTime(), eventFormViewModel.OccurrencesCount.Value);
                         
                         seriesEndDateUTC = seriesEndDateUTC.Value.AddDays(1);
                         break;

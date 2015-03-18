@@ -45,7 +45,7 @@ namespace PersonalCalendar.Web.ViewModels.Events
 
         public IEnumerable<SelectListItem> Weekdays { get; private set; }
 
-        public int? OccurencesCount { get; set; }
+        public int? OccurrencesCount { get; set; }
 
         public DateTime? SeriesEndDate { get; set; }
 

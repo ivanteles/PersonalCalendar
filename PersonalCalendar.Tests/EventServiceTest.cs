@@ -126,7 +126,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventsForCalendar_WhenDailyRecurringEvent_ReturnsProperNumberOfOccurences()
+        public void GetRecurringEventsForCalendar_WhenDailyRecurringEvent_ReturnsProperNumberOfOccurrences()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>
@@ -164,7 +164,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventsForCalendar_WhenDailyRecurringEventSeriesFinishesDuringGivenPeriod_ReturnsProperNumberOfOccurences()
+        public void GetRecurringEventsForCalendar_WhenDailyRecurringEventSeriesFinishesDuringGivenPeriod_ReturnsProperNumberOfOccurrences()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>
@@ -226,7 +226,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventsForCalendar_WhenWeeklyRecurringEvent_ReturnsProperNumberOfOccurences()
+        public void GetRecurringEventsForCalendar_WhenWeeklyRecurringEvent_ReturnsProperNumberOfOccurrences()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>
@@ -266,7 +266,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventsForCalendar_WhenWeeklyRecurringEventWithDayOfTheWeekSpecified_ReturnsProperNumberOfOccurences()
+        public void GetRecurringEventsForCalendar_WhenWeeklyRecurringEventWithDayOfTheWeekSpecified_ReturnsProperNumberOfOccurrences()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>
@@ -306,7 +306,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventsForCalendar_WhenWeeklyRecurringEventSeriesFinishesDuringGivenPeriod_ReturnsProperNumberOfOccurences()
+        public void GetRecurringEventsForCalendar_WhenWeeklyRecurringEventSeriesFinishesDuringGivenPeriod_ReturnsProperNumberOfOccurrences()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>
@@ -362,7 +362,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventForCalendar_WhenWeeklyRecurringEventSeriesFinishesBeforeGivenPeriodButLastEventOverlaps_ReturnsOneOccurence()
+        public void GetRecurringEventForCalendar_WhenWeeklyRecurringEventSeriesFinishesBeforeGivenPeriodButLastEventOverlaps_ReturnsOneOccurrence()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>
@@ -390,7 +390,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventForCalendar_WhenMonthlyRecurringEvent_ReturnsProperNumberOfOccurences()
+        public void GetRecurringEventForCalendar_WhenMonthlyRecurringEvent_ReturnsProperNumberOfOccurrences()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>
@@ -434,7 +434,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventForCalendar_WhenMonthlyRecurringEventWithDayOfTheWeekSpecified_ReturnsProperNumberOfOccurences()
+        public void GetRecurringEventForCalendar_WhenMonthlyRecurringEventWithDayOfTheWeekSpecified_ReturnsProperNumberOfOccurrences()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>
@@ -475,7 +475,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventForCalendar_WhenMonthlyRecurringEventSeriesFinishesDuringGivenPeriod_ReturnsProperNumberOfOccurences()
+        public void GetRecurringEventForCalendar_WhenMonthlyRecurringEventSeriesFinishesDuringGivenPeriod_ReturnsProperNumberOfOccurrences()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>
@@ -535,7 +535,7 @@ namespace PersonalCalendar.Tests
         }
 
         [Test]
-        public void GetRecurringEventsForCalendar_WhenYearlyRecurringEvent_ReturnsProperNumberOfOccurences()
+        public void GetRecurringEventsForCalendar_WhenYearlyRecurringEvent_ReturnsProperNumberOfOccurrences()
         {
             // Arrange
             IQueryable<Event> mockEvents = new List<Event>

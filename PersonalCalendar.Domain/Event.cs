@@ -30,9 +30,9 @@ namespace PersonalCalendar.Domain
 
         public Calendar Calendar { get; set; }
 
-        public IEnumerable<DateTime> GetSeriesOccurences(DateTime endDateTimeUTC)
+        public IEnumerable<DateTime> GetSeriesOccurrences(DateTime endDateTimeUTC)
         {
-            IEnumerable<DateTime> occurences = new List<DateTime>();
+            IEnumerable<DateTime> occurrences = new List<DateTime>();
 
             DateTime eventEndDateTime = SeriesEndDateUTC.HasValue 
                                         ? (SeriesEndDateUTC.Value < endDateTimeUTC ? SeriesEndDateUTC.Value : endDateTimeUTC) 
@@ -64,9 +64,9 @@ namespace PersonalCalendar.Domain
                     throw new NotImplementedException();
             }
 
-            occurences = scheduler.GetOccurences(StartDateTimeUTC, eventEndDateTime);
+            occurrences = scheduler.GetOccurrences(StartDateTimeUTC, eventEndDateTime);
 
-            return occurences;
+            return occurrences;
         }
 
         public object Clone()

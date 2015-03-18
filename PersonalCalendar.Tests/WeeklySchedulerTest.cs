@@ -12,23 +12,23 @@ namespace PersonalCalendar.Tests
     {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void GetOccurences_WhenStartDateIsLaterThanEndDate_ThrowsArgumentException()
+        public void GetOccurrences_WhenStartDateIsLaterThanEndDate_ThrowsArgumentException()
         {
             WeeklyScheduler scheduler = new WeeklyScheduler(FrequencySubtype.None, 1);
 
-            IEnumerable<DateTime> occurences = scheduler.GetOccurences(new DateTime(2015, 3, 13), new DateTime(2015, 3, 11));
+            IEnumerable<DateTime> occurrences = scheduler.GetOccurrences(new DateTime(2015, 3, 13), new DateTime(2015, 3, 11));
         }
 
         [Test]
-        public void GetOccurences_WhenFrequencySubtypeIsNone_ReturnsProperNumberOfOccurences()
+        public void GetOccurrences_WhenFrequencySubtypeIsNone_ReturnsProperNumberOfOccurrences()
         {
             WeeklyScheduler scheduler = new WeeklyScheduler(FrequencySubtype.None, 1);
 
-            IEnumerable<DateTime> occurences = scheduler.GetOccurences(new DateTime(2015, 3, 1), new DateTime(2015, 4, 1)).OrderBy(o => o);
+            IEnumerable<DateTime> occurrences = scheduler.GetOccurrences(new DateTime(2015, 3, 1), new DateTime(2015, 4, 1)).OrderBy(o => o);
 
-            Assert.AreEqual(5, occurences.Count());
+            Assert.AreEqual(5, occurrences.Count());
 
-            IEnumerable<DateTime> expectedOccurences = new List<DateTime>
+            IEnumerable<DateTime> expectedOccurrences = new List<DateTime>
             {
                 new DateTime(2015, 3, 1),
                 new DateTime(2015, 3, 8),
@@ -37,19 +37,19 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 29)
             };
 
-            CollectionAssert.AreEqual(expectedOccurences, occurences);
+            CollectionAssert.AreEqual(expectedOccurrences, occurrences);
         }
 
         [Test]
-        public void GetOccurences_WhenFrequencySubtypeIsDefined_ReturnsProperNumberOfOccurences()
+        public void GetOccurrences_WhenFrequencySubtypeIsDefined_ReturnsProperNumberOfOccurrences()
         {
             WeeklyScheduler scheduler = new WeeklyScheduler(FrequencySubtype.Monday | FrequencySubtype.Tuesday, 2);
 
-            IEnumerable<DateTime> occurences = scheduler.GetOccurences(new DateTime(2015, 3, 1), new DateTime(2015, 4, 1)).OrderBy(o => o);
+            IEnumerable<DateTime> occurrences = scheduler.GetOccurrences(new DateTime(2015, 3, 1), new DateTime(2015, 4, 1)).OrderBy(o => o);
 
-            Assert.AreEqual(6, occurences.Count());
+            Assert.AreEqual(6, occurrences.Count());
 
-            IEnumerable<DateTime> expectedOccurences = new List<DateTime>
+            IEnumerable<DateTime> expectedOccurrences = new List<DateTime>
             {
                 new DateTime(2015, 3, 2),
                 new DateTime(2015, 3, 3),
@@ -59,58 +59,58 @@ namespace PersonalCalendar.Tests
                 new DateTime(2015, 3, 31)
             };
 
-            CollectionAssert.AreEqual(expectedOccurences, occurences);
+            CollectionAssert.AreEqual(expectedOccurrences, occurrences);
         }
 
         [Test]
-        public void GetOccurences_WhenDatesRangeIsSmallerThanInterval_ReturnsOnlyOneElement()
+        public void GetOccurrences_WhenDatesRangeIsSmallerThanInterval_ReturnsOnlyOneElement()
         {
             WeeklyScheduler scheduler = new WeeklyScheduler(FrequencySubtype.None, 1);
 
-            IEnumerable<DateTime> occurences = scheduler.GetOccurences(new DateTime(2015, 3, 1), new DateTime(2015, 3, 5)).OrderBy(o => o);
+            IEnumerable<DateTime> occurrences = scheduler.GetOccurrences(new DateTime(2015, 3, 1), new DateTime(2015, 3, 5)).OrderBy(o => o);
 
-            Assert.AreEqual(1, occurences.Count());
+            Assert.AreEqual(1, occurrences.Count());
 
-            IEnumerable<DateTime> expectedOccurences = new List<DateTime>
+            IEnumerable<DateTime> expectedOccurrences = new List<DateTime>
             {
                 new DateTime(2015, 3, 1)
             };
 
-            CollectionAssert.AreEqual(expectedOccurences, occurences);
+            CollectionAssert.AreEqual(expectedOccurrences, occurrences);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GetOccurenceDateTime_WhenOccurencesCountIsSmallerThanOne_ThrowsArgumentOutOfRangeException()
+        public void GetOccurrenceDateTime_WhenOccurrencesCountIsSmallerThanOne_ThrowsArgumentOutOfRangeException()
         {
             WeeklyScheduler scheduler = new WeeklyScheduler(FrequencySubtype.None, 1);
 
-            DateTime occurenceDateTime = scheduler.GetOccurenceDateTime(new DateTime(2015, 3, 13), 0);
+            DateTime occurrenceDateTime = scheduler.GetOccurrenceDateTime(new DateTime(2015, 3, 13), 0);
         }
 
         [Test]
-        public void GetOccurenceDateTime_FrequencySubtypeIsNone_ReturnsProperDateTime()
+        public void GetOccurrenceDateTime_FrequencySubtypeIsNone_ReturnsProperDateTime()
         {
             WeeklyScheduler scheduler = new WeeklyScheduler(FrequencySubtype.None, 1);
 
-            DateTime occurenceDateTime = scheduler.GetOccurenceDateTime(new DateTime(2015, 3, 1), 3);
+            DateTime occurrenceDateTime = scheduler.GetOccurrenceDateTime(new DateTime(2015, 3, 1), 3);
 
-            Assert.AreEqual(new DateTime(2015, 3, 15), occurenceDateTime);
+            Assert.AreEqual(new DateTime(2015, 3, 15), occurrenceDateTime);
         }
 
         [Test]
-        public void GetOccurenceDateTime_FrequencySubtypeIsDefined_ReturnsProperDateTime()
+        public void GetOccurrenceDateTime_FrequencySubtypeIsDefined_ReturnsProperDateTime()
         {
             // Check for different variants.
             WeeklyScheduler scheduler = new WeeklyScheduler(FrequencySubtype.Monday | FrequencySubtype.Saturday | FrequencySubtype.Sunday, 1);
-            DateTime occurenceDateTime = scheduler.GetOccurenceDateTime(new DateTime(2015, 3, 1), 5);
+            DateTime occurrenceDateTime = scheduler.GetOccurrenceDateTime(new DateTime(2015, 3, 1), 5);
             
-            Assert.AreEqual(new DateTime(2015, 3, 9), occurenceDateTime);
+            Assert.AreEqual(new DateTime(2015, 3, 9), occurrenceDateTime);
 
             scheduler = new WeeklyScheduler(FrequencySubtype.Monday | FrequencySubtype.Wednesday, 2);
-            occurenceDateTime = scheduler.GetOccurenceDateTime(new DateTime(2015, 3, 3), 3);
+            occurrenceDateTime = scheduler.GetOccurrenceDateTime(new DateTime(2015, 3, 3), 3);
 
-            Assert.AreEqual(new DateTime(2015, 3, 18), occurenceDateTime);
+            Assert.AreEqual(new DateTime(2015, 3, 18), occurrenceDateTime);
         }
     }
 }

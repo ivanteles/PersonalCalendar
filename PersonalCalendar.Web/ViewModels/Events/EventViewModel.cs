@@ -5,7 +5,7 @@ namespace PersonalCalendar.Web.ViewModels.Events
 {
     public class EventViewModel
     {
-        public DateTime OccurenceDate { get; set; }
+        public DateTime OccurrenceDate { get; set; }
 
         public IEnumerable<EventDetailsViewModel> Details { get; set; }
     }

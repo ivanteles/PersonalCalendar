@@ -8,19 +8,19 @@ namespace PersonalCalendar.Domain
         public YearlyScheduler(FrequencySubtype freqSubtype, int interval)
             : base(freqSubtype, interval) { }
 
-        public override IEnumerable<DateTime> GetOccurences(DateTime startDateTime, DateTime endDateTime)
+        public override IEnumerable<DateTime> GetOccurrences(DateTime startDateTime, DateTime endDateTime)
         {
             if (startDateTime > endDateTime)
                 throw new ArgumentException("startDateTime cannot be later than endDateTime");
 
-            List<DateTime> occurences = new List<DateTime>();
+            List<DateTime> occurrences = new List<DateTime>();
 
             for (DateTime dateTime = startDateTime; dateTime < endDateTime; dateTime = dateTime.AddYears(_interval))
             {
-                occurences.Add(dateTime);
+                occurrences.Add(dateTime);
             }
 
-            return occurences;
+            return occurrences;
         }
     }
 }

@@ -10,18 +10,18 @@ namespace PersonalCalendar.Domain
         public WeeklyScheduler(FrequencySubtype freqSubtype, int interval)
             : base(freqSubtype, interval) { }
 
-        public override IEnumerable<DateTime> GetOccurences(DateTime startDateTime, DateTime endDateTime)
+        public override IEnumerable<DateTime> GetOccurrences(DateTime startDateTime, DateTime endDateTime)
         {
             if (startDateTime > endDateTime)
                 throw new ArgumentException("startDateTime cannot be later than endDateTime");
 
-             List<DateTime> occurences = new List<DateTime>();
+             List<DateTime> occurrences = new List<DateTime>();
 
              if (_freqSubtype == FrequencySubtype.None)
              {
                  for (DateTime dateTime = startDateTime; dateTime < endDateTime; dateTime = dateTime.AddDays(7 * _interval))
                  {
-                     occurences.Add(dateTime);
+                     occurrences.Add(dateTime);
                  }
              }
              else
@@ -34,29 +34,29 @@ namespace PersonalCalendar.Domain
 
                      for (DateTime dateTime = startWeekday; dateTime < endDateTime; dateTime = dateTime.AddDays(7 * _interval))
                      {
-                         occurences.Add(dateTime);
+                         occurrences.Add(dateTime);
                      }
                  }
              }
 
-             return occurences;
+             return occurrences;
          }
 
-        public DateTime GetOccurenceDateTime(DateTime startDateTime, int occurencesCount)
+        public DateTime GetOccurrenceDateTime(DateTime startDateTime, int occurrencesCount)
         {
-            if (occurencesCount < 1)
-                throw new ArgumentOutOfRangeException("occurencesCount");
+            if (occurrencesCount < 1)
+                throw new ArgumentOutOfRangeException("occurrencesCount");
 
             DateTime dateTime = startDateTime;
 
             if (_freqSubtype == FrequencySubtype.None)
             {
-                int occurence = 1;
+                int occurrence = 1;
 
-                while(occurence < occurencesCount)
+                while(occurrence < occurrencesCount)
                 {
                     dateTime = dateTime.AddDays(7 * _interval);
-                    occurence++;
+                    occurrence++;
                 }
             }
             else
@@ -75,20 +75,20 @@ namespace PersonalCalendar.Domain
 
                 daysOfWeek = sortedDaysOfWeek;
 
-                int occurence = 0;
+                int occurrence = 0;
 
-                while(occurence < occurencesCount)
+                while(occurrence < occurrencesCount)
                 {
                     foreach (var dayOfWeek in daysOfWeek)
                     {
                         dateTime = dateTime.GetNextWeekday(dayOfWeek);
-                        occurence++;
+                        occurrence++;
 
-                        if (occurence == occurencesCount)
+                        if (occurrence == occurrencesCount)
                             break;
                     }
 
-                    if (occurence < occurencesCount)
+                    if (occurrence < occurrencesCount)
                         dateTime = startDateTime.GetNextWeekday(daysOfWeek.ElementAt(0)).AddDays(7 * _interval);
                 }
             }

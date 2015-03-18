@@ -13,17 +13,17 @@
             $('input[name="EventSeriesFinish"]').change(function () {
                 switch ($(this).val()) {
                     case 'never':
-                        $('#OccurencesCount').prop('disabled', true);
+                        $('#OccurrencesCount').prop('disabled', true);
                         $('#SeriesEndDate').prop('disabled', true);
                         break;
 
-                    case 'occurences':
-                        $('#OccurencesCount').prop('disabled', false);
+                    case 'occurrences':
+                        $('#OccurrencesCount').prop('disabled', false);
                         $('#SeriesEndDate').prop('disabled', true);
                         break;
 
                     case 'date':
-                        $('#OccurencesCount').prop('disabled', true);
+                        $('#OccurrencesCount').prop('disabled', true);
                         $('#SeriesEndDate').prop('disabled', false);
                         break;
                 }
