@@ -10,6 +10,9 @@ namespace PersonalCalendar.Domain
 
         public Scheduler(FrequencySubtype freqSubtype, int interval)
         {
+            if (interval < 1)
+                throw new ArgumentOutOfRangeException("interval");
+
             _freqSubtype = freqSubtype;
             _interval = interval;
         }

@@ -10,6 +10,9 @@ namespace PersonalCalendar.Domain
 
         public override IEnumerable<DateTime> GetOccurences(DateTime startDateTime, DateTime endDateTime)
         {
+            if (startDateTime > endDateTime)
+                throw new ArgumentException("startDateTime cannot be later than endDateTime");
+
             List<DateTime> occurences = new List<DateTime>();
 
             for (DateTime dateTime = startDateTime; dateTime < endDateTime; dateTime = dateTime.AddDays(_interval))

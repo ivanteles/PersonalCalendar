@@ -12,6 +12,9 @@ namespace PersonalCalendar.Domain
 
         public override IEnumerable<DateTime> GetOccurences(DateTime startDateTime, DateTime endDateTime)
         {
+            if (startDateTime > endDateTime)
+                throw new ArgumentException("startDateTime cannot be later than endDateTime");
+
              List<DateTime> occurences = new List<DateTime>();
 
              if (_freqSubtype == FrequencySubtype.None)
@@ -41,6 +44,9 @@ namespace PersonalCalendar.Domain
 
         public DateTime GetOccurenceDateTime(DateTime startDateTime, int occurencesCount)
         {
+            if (occurencesCount < 1)
+                throw new ArgumentOutOfRangeException("occurencesCount");
+
             DateTime dateTime = startDateTime;
 
             if (_freqSubtype == FrequencySubtype.None)
@@ -56,18 +62,33 @@ namespace PersonalCalendar.Domain
             else
             {
                 IEnumerable<DayOfWeek> daysOfWeek = GetDaysOfWeekFromFrequencySubtype();
+                
+                List<DayOfWeek> sortedDaysOfWeek = new List<DayOfWeek>();
 
-                int occurence = 1;
-
-                while(occurence <= occurencesCount)
+                for(int i = 0; i < 7; i++)
                 {
-                    foreach(var dayOfWeek in daysOfWeek)
+                    DayOfWeek day = startDateTime.AddDays(i).DayOfWeek;
+
+                    if (daysOfWeek.Any(d => d == day))
+                        sortedDaysOfWeek.Add(day);
+                }
+
+                daysOfWeek = sortedDaysOfWeek;
+
+                int occurence = 0;
+
+                while(occurence < occurencesCount)
+                {
+                    foreach (var dayOfWeek in daysOfWeek)
                     {
                         dateTime = dateTime.GetNextWeekday(dayOfWeek);
                         occurence++;
+
+                        if (occurence == occurencesCount)
+                            break;
                     }
 
-                    if (occurence <= occurencesCount)
+                    if (occurence < occurencesCount)
                         dateTime = startDateTime.GetNextWeekday(daysOfWeek.ElementAt(0)).AddDays(7 * _interval);
                 }
             }

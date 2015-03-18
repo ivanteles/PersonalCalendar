@@ -1,11 +1,11 @@
-﻿using PersonalCalendar.Domain;
+﻿using AutoMapper;
+using PersonalCalendar.Domain;
 using PersonalCalendar.Service;
 using PersonalCalendar.Web.ViewModels.Events;
 using System;
-using System.Web.Mvc;
-using System.Linq;
 using System.Collections.Generic;
-using AutoMapper;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace PersonalCalendar.Web.Controllers
 {
@@ -23,7 +23,7 @@ namespace PersonalCalendar.Web.Controllers
         {
             DateTime now = DateTime.UtcNow;
 
-            // Only "month" calendar view implemented.
+            // Only month view implemented.
             DateTime firstDayUTC = new DateTime(now.Year, now.Month, 1);
             DateTime lastDayUTC = firstDayUTC.AddMonths(1);
 
@@ -36,7 +36,7 @@ namespace PersonalCalendar.Web.Controllers
 
             foreach(var group in allGroupedEvents)
             {
-                var eventViewModel = new EventViewModel { OccurenceDateTime = group.Key.ToLocalTime() };
+                var eventViewModel = new EventViewModel { OccurenceDate = group.Key };
 
                 List<EventDetailsViewModel> eventDetails = new List<EventDetailsViewModel>();
 

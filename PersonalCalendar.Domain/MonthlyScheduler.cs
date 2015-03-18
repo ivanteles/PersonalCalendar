@@ -11,6 +11,9 @@ namespace PersonalCalendar.Domain
 
          public override IEnumerable<DateTime> GetOccurences(DateTime startDateTime, DateTime endDateTime)
          {
+             if (startDateTime > endDateTime)
+                 throw new ArgumentException("startDateTime cannot be later than endDateTime");
+
              List<DateTime> occurences = new List<DateTime>();
 
              int dayOfWeekNumber = (int)Math.Ceiling(startDateTime.Day / 7.0);
