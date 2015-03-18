@@ -33,6 +33,9 @@ namespace PersonalCalendar.Web.Controllers
 
             var calendarViewModel = Mapper.Map<CalendarViewModel>(calendar);
 
+            if (TempData.ContainsKey("Message"))
+                ViewBag.Message = TempData["Message"];
+
             return View(calendarViewModel);
         }
     }

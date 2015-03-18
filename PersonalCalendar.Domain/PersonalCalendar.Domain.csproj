@@ -40,12 +40,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calendar.cs" />
+    <Compile Include="DailyScheduler.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="FrequencySubtype.cs" />
     <Compile Include="FrequencyType.cs" />
+    <Compile Include="MonthlyScheduler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scheduler.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="WeeklyScheduler.cs" />
+    <Compile Include="YearlyScheduler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PersonalCalendar.Infrastructure\PersonalCalendar.Infrastructure.csproj">

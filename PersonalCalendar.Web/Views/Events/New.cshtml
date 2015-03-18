@@ -7,52 +7,102 @@
     @using (Html.BeginForm("Create", "Events"))
     {
         @Html.HiddenFor(m => m.CalendarId)
+        @Html.ValidationMessageFor(m => m.CalendarId)
         
-        <p>
+        <div class="form-group">
             @Html.LabelFor(m => m.Title)
-            @Html.TextBoxFor(m => m.Title)
-        </p>
-        
-        <p>
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Title)
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(m => m.Location)
-            @Html.TextBoxFor(m => m.Location)
-        </p>
+            @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(m => m.Description)
-            @Html.TextAreaFor(m => m.Description)
-        </p>
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(m => m.Color)
-            @Html.TextBoxFor(m => m.Color)
-        </p>
+            @Html.TextBoxFor(m => m.Color, new { @class = "form-control" })
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(m => m.StartDateTime)
-            @Html.TextBoxFor(m => m.StartDateTime)
-        </p>
+            @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.StartDateTime)
+        </div>
 
-        <p>
+        <div class="form-group">
             @Html.LabelFor(m => m.EndDateTime)
-            @Html.TextBoxFor(m => m.EndDateTime)
-        </p>
-        
-        <hr />
-        
-        <p>
+            @Html.TextBoxFor(m => m.EndDateTime, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EndDateTime)
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(m => m.FreqType)
-            @Html.EnumDropDownListFor(m => m.FreqType)
-        </p>
+            @Html.DropDownListFor(m => m.FreqType, Model.FrequencyTypes, new { @class = "form-control" })
+        </div>
+        
+        <div class="recurring-event-panel">
+            <div class="form-group">
+                @Html.LabelFor(m => m.FreqInterval)
+                @Html.DropDownListFor(m => m.FreqInterval, Model.FrequencyIntervals, new { @class = "form-control" })
+            </div>
 
-        <p>
-            @Html.LabelFor(m => m.FreqInterval)
-            @Html.TextBoxFor(m => m.FreqInterval)
-        </p>
+            <div class="form-group">
+                @foreach(var item in Model.Weekdays)
+                {
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="SelectedWeekdays" id="@String.Format("{0}-{1}", item.Text, item.Value)" value="@item.Value" /> @item.Text
+                    </label>
+                }
+            </div>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+            <div class="form-group">
+                Event series finish:
+
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="EventSeriesFinish" id="series-finish-never" value="never" checked />
+                        Never
+                    </label>
+                </div>
+
+                <div class="radio">
+                    <span class="form-inline">
+                        <label>
+                            <input type="radio" name="EventSeriesFinish" id="series-finish-occurences" value="occurences" />
+                            After
+                        </label>
+
+                        @Html.TextBoxFor(m => m.OccurencesCount, new { @class = "form-control", disabled = "disabled", style="width: 50px;" })
+                        occurences
+                    </span>
+                </div>
+
+                <div class="radio">
+                    <span class="form-inline">
+                        <label>
+                            <input type="radio" name="EventSeriesFinish" id="series-finish-occurences" value="date" />
+                            At
+                        </label>
+  
+                        @Html.TextBoxFor(m => m.SeriesEndDate, new { @class = "form-control", disabled = "disabled", style = "width: 150px;" })
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <input type="submit" class="btn btn-primary" value="Save" />
+        @Html.ActionLink("Cancel", "Details", new { Controller = "Calendars", id = Model.CalendarId }, new { @class = "btn btn-default" })
     }
 
 </div>
+
+<script type="text/javascript">
+    EventsNew.initialize();
+</script>

@@ -10,13 +10,21 @@
     <title>@ViewBag.Title</title>
 
     @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/plugins")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/plugins")
+    @Scripts.Render("~/bundles/app")
 </head>
 
 <body>
     <div id="main" class="container">
+        @if(ViewBag.Message != null)
+        {
+            <div class="alert alert-info">@ViewBag.Message</div>
+        }
+
         @RenderBody()
     </div>
 </body>
